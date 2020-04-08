@@ -2,6 +2,9 @@ package com.paul.webrestfulcrud.config;
 
 import com.paul.webrestfulcrud.component.LoginHandlerInterceptor;
 import com.paul.webrestfulcrud.component.MyLocaleResolver;
+import org.springframework.boot.web.server.WebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -17,6 +20,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
+
+    /**
+     * 定制嵌入式的Servlet容器的定制器；来修改Servlet容器的配置
+     * @return
+     */
+    public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> webServerFactoryCustomizer(){
+        //定制嵌入式servlet容器的相关规则
+        return factory -> factory.setPort(8080);
+    }
 
 
     @Override
